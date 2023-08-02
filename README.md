@@ -93,9 +93,9 @@ To generate your api key you can use a javascript or a php cpde
 ##JQuery TEST
 ```
 var form = new FormData();
-form.append("name", "Davi salles Amaral");
-form.append("email", "daviasdasmaral@gmail.com");
-form.append("password", "Flkq0108");
+form.append("name", "John Test");
+form.append("email", "test@test.com");
+form.append("password", "safkhaskfhas");
 
 var settings = {
   "url": "http://127.0.0.1:8000/api/generate-api-key",
@@ -145,7 +145,7 @@ var settings = {
   "method": "GET",
   "timeout": 0,
   "headers": {
-    "api_token": "xtEjLkvf0rq7hQtmOP2e3hvNxsrPKwNOzXZ8UZc3",
+    "api_token": "your-key-generated",
     "Content-Type": "text/plain"
   },
   "data": "{\r\n    \"ips\": [\"111.111.1.1\", \"192.168.1.2\"]\r\n}",
