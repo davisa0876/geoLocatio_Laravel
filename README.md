@@ -1,64 +1,185 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# GeoLocation API
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This is a Laravel-based project that allows users to generate API keys and get geolocation details of IP addresses. 
 
-## About Laravel
+## Getting Started
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Prerequisites
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+You need to have the following installed on your local machine:
 
-## Learning Laravel
+- PHP >= 7.4
+- Composer
+- SQLLite (or any database that you prefer)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Installation
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. Clone the repository to your local machine:
 
-## Laravel Sponsors
+    ```
+    git clone https://github.com/yourusername/your-repository.git
+    ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+2. Go to the project directory:
 
-### Premium Partners
+    ```
+    cd your-repository
+    ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+3. Install the PHP dependencies of the project:
 
-## Contributing
+    ```
+    composer install
+    ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+4. Copy the example env file:
 
-## Code of Conduct
+    ```
+    cp .env.example .env
+    ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+5. Generate an application key:
 
-## Security Vulnerabilities
+    ```
+    php artisan key:generate
+    ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+6. Create an empty database and add your database credentials into your .env file:
+    ```
+    touch database/database.sqlite
+    ```
 
-## License
+    ```
+    DB_CONNECTION=sqlite
+    #DB_HOST=127.0.0.1
+    #DB_PORT=3306
+    #DB_DATABASE=laravel
+    #DB_USERNAME=root
+    #DB_PASSWORD=
+    ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+7. Migrate the database:
+
+    ```
+    php artisan migrate
+    ```
+
+8. Finally, start the application:
+
+    ```
+    php artisan serve
+    ```
+
+The application will be running at [http://localhost:8000](http://localhost:8000).
+
+## Usage
+
+### Generate an API Key
+
+Make a POST request to the `/api/generate-api-key` endpoint with the following JSON body:
+
+```json
+{
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "password": "yoursecurepassword"
+}
+```
+
+To generate your api key you can use a javascript or a php cpde
+
+##JQuery TEST
+```
+var form = new FormData();
+form.append("name", "Davi salles Amaral");
+form.append("email", "daviasdasmaral@gmail.com");
+form.append("password", "Flkq0108");
+
+var settings = {
+  "url": "http://127.0.0.1:8000/api/generate-api-key",
+  "method": "POST",
+  "timeout": 0,
+  "processData": false,
+  "mimeType": "multipart/form-data",
+  "contentType": false,
+  "data": form
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+```
+
+##PHP TEST
+```
+<?php
+
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'http://127.0.0.1:8000/api/generate-api-key',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'POST',
+  CURLOPT_POSTFIELDS => array('name' => 'Jonh Test','email' => 'jonh@gmail.com','password' => 'SDKHGDSKHGS')
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+echo $response;
+```
+
+##After Genarate the Key you can call the IP Location 
+
+#Jquery
+```
+var settings = {
+  "url": "http://127.0.0.1:8000/api/ip-details",
+  "method": "GET",
+  "timeout": 0,
+  "headers": {
+    "api_token": "xtEjLkvf0rq7hQtmOP2e3hvNxsrPKwNOzXZ8UZc3",
+    "Content-Type": "text/plain"
+  },
+  "data": "{\r\n    \"ips\": [\"111.111.1.1\", \"192.168.1.2\"]\r\n}",
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+```
+
+#PHP
+```
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'http://127.0.0.1:8000/api/ip-details',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'GET',
+  CURLOPT_POSTFIELDS =>'{
+    "ips": ["174.95.254.184", "192.168.1.2"]
+}',
+  CURLOPT_HTTPHEADER => array(
+    'api_token: your-key-generated',
+    'Content-Type: text/plain'
+  ),
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+echo $response;
+```
